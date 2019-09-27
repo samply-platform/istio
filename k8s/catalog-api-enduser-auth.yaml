@@ -4,23 +4,28 @@ metadata:
   name: "catalog-api-auth"
 spec:
   targets:
-  - name: catalog-api
+    - name: catalog-api
   origins:
-  - jwt:
-      issuer: "http://localhost:8080/auth/realms/master"
-      jwksUri: "http://keycloak-http.default.svc.cluster.local/auth/realms/istio/protocol/openid-connect/certs"
+    - jwt:
+        issuer: "http://keycloak.devlocal/auth/realms/samply"
+        jwksUri: "http://keycloak-http.default.svc.cluster.local/auth/realms/samply/protocol/openid-connect/certs"
+        trigger_rules:
+          - excluded_paths:
+              - exact: /
+              - prefix: /swagger-ui
+              - exact: /openapi
   principalBinding: USE_ORIGIN
 ---
-apiVersion: config.istio.io/v1alpha2
-kind: rule
-metadata:
-  name: auth-header
-  namespace: istio-system
-spec:
-  actions:
-  - handler: keyval.istio-system
-    instances: [ keyval ]
-  request_header_operations:
-  - name: X-user-id
-    values:
-    - request.auth.claims["sub"]
+# apiVersion: config.istio.io/v1alpha2
+# kind: rule
+# metadata:
+#   name: auth-header
+#   namespace: istio-system
+# spec:
+#   actions:
+#     - handler: keyval.istio-system
+#       instances: [keyval]
+#   request_header_operations:
+#     - name: X-user-id
+#       values:
+#         - request.auth.claims["sub"]
