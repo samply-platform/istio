@@ -16,16 +16,13 @@ spec:
               - exact: /openapi
   principalBinding: USE_ORIGIN
 ---
-# apiVersion: config.istio.io/v1alpha2
-# kind: rule
-# metadata:
-#   name: auth-header
-#   namespace: istio-system
-# spec:
-#   actions:
-#     - handler: keyval.istio-system
-#       instances: [keyval]
-#   request_header_operations:
-#     - name: X-user-id
-#       values:
-#         - request.auth.claims["sub"]
+apiVersion: config.istio.io/v1alpha2
+kind: rule
+metadata:
+  name: auth-header
+  namespace: istio-system
+spec:
+  request_header_operations:
+    - name: X-user-id
+      values:
+        - request.auth.claims["sub"]

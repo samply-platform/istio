@@ -38,8 +38,8 @@ kubectl label namespace default istio-injection=enabled
 
 Insert istioingress ip after using `minikube tunnel` into
 
-`/etc/hosts`
+`/etc/NetworkManager/dnsmasq.d/kube.conf`
 
 ```
-10.101.224.91 .devlocal
+address=/.devlocal/10.100.87.68
 ```
