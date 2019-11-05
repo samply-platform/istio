@@ -19,6 +19,8 @@ helm install --name istio --namespace istio-system \
     istio.io/istio --wait
 
 kubectl label namespace default istio-injection=enabled
+
+kubectl apply -f k8s/
 ```
 
 ## Auth

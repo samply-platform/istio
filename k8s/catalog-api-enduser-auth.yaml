@@ -8,12 +8,12 @@ spec:
   origins:
     - jwt:
         issuer: "http://keycloak.devlocal/auth/realms/samply"
-        jwksUri: "http://keycloak-http.default.svc.cluster.local/auth/realms/samply/protocol/openid-connect/certs"
+        jwksUri: "http://keycloak.devlocal/auth/realms/samply/protocol/openid-connect/certs"
         trigger_rules:
           - excluded_paths:
               - exact: /
               - prefix: /swagger-ui
-              - exact: /openapi
+              - prefix: /swagger
   principalBinding: USE_ORIGIN
 ---
 apiVersion: config.istio.io/v1alpha2
